@@ -9,7 +9,7 @@ Player::Player() {
 	currentImg = idleImg[0];
 	currentImgIndex = 0;
 	playerState = 1;
-	speed = 5;
+	speed = 10;
 	setPlayerBorders();
 	setFlipped(false);
 }
@@ -128,9 +128,9 @@ void Player::updatePlayerPosition() {
 }
 
 void Player::setPlayerBorders() {
-	playerBorderLeft = 20;
-	playerBorderRight = getWindowWidth() - 20;
-	playerBorderTop = 200;
+	playerBorderLeft = 10;
+	playerBorderRight = getWindowWidth() - 10;
+	playerBorderTop = 130;
 	playerBorderBottom = getWindowHeight() - 100;
 }
 

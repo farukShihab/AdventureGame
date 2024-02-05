@@ -82,6 +82,9 @@ void Game::handleEvent() {
 				break;
 			}
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			std::cout << e.button.x << ' ' << e.button.y << std::endl;
+			break;
 		}
 	}
 }
