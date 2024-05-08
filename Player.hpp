@@ -19,8 +19,10 @@ private:
 
 	std::vector<std::string> idleImg;
 	std::vector<std::string> runImg;
+	std::vector<std::string> meleeImg;
 	void initIdleImg();
 	void initRunImg();
+	void initMeleeImg();
 
 	int playerState;
 
@@ -40,6 +42,7 @@ private:
 
 	void controlMovement(bool flag, int direction);
 
+
 	
 public:
 	Player();
@@ -50,4 +53,6 @@ public:
 	void decreasePlayerX(bool flag);
 	void increasePlayerY(bool flag);
 	void decreasePlayerY(bool flag);
+
+	void meleeAttack();
 };

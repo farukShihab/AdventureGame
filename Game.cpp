@@ -52,38 +52,47 @@ void Game::handleEvent() {
 			case SDLK_ESCAPE:
 				gameIsRunning = false;
 				break;
-			case SDLK_RIGHT:
+			case SDLK_d:
 				player.increasePlayerX(true);
 				break;
-			case SDLK_LEFT:
+			case SDLK_a:
 				player.decreasePlayerX(true);
 				break;
-			case SDLK_UP:
+			case SDLK_w:
 				player.increasePlayerY(true);
 				break;
-			case SDLK_DOWN:
+			case SDLK_s:
 				player.decreasePlayerY(true);
 				break;
 			}
 			break;
 		case SDL_KEYUP:
 			switch (e.key.keysym.sym) {
-			case SDLK_RIGHT:
+			case SDLK_d:
 				player.increasePlayerX(false);
 				break;
-			case SDLK_LEFT:
+			case SDLK_a:
 				player.decreasePlayerX(false);
 				break;
-			case SDLK_UP:
+			case SDLK_w:
 				player.increasePlayerY(false);
 				break;
-			case SDLK_DOWN:
+			case SDLK_s:
 				player.decreasePlayerY(false);
 				break;
 			}
 			break;
 		case SDL_MOUSEBUTTONDOWN:
 			std::cout << e.button.x << ' ' << e.button.y << std::endl;
+			switch (e.button.button) {
+			case SDL_BUTTON_LEFT:
+				std::cout << "MOUSE LEFT CLICKED" << '\n';
+				player.meleeAttack();
+				break;
+			case SDL_BUTTON_RIGHT:
+				std::cout << "MOUSE RIGHT CLICKED" << '\n';
+				break;
+			}
 			break;
 		}
 	}

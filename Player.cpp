@@ -5,6 +5,7 @@
 Player::Player() {
 	initIdleImg();
 	initRunImg();
+	initMeleeImg();
 	initPlayerRect(100, 300, 240, 200);
 	currentImg = idleImg[0];
 	currentImgIndex = 0;
@@ -41,6 +42,17 @@ void Player::initRunImg() {
 	runImg[7] = "Assets//Images//Player//Run//8.png";
 }
 
+void Player::initMeleeImg() {
+	meleeImg.resize(7);
+	meleeImg[0] = "Assets//Images//Player//Melee//1.png";
+	meleeImg[1] = "Assets//Images//Player//Melee//2.png";
+	meleeImg[2] = "Assets//Images//Player//Melee//3.png";
+	meleeImg[3] = "Assets//Images//Player//Melee//4.png";
+	meleeImg[4] = "Assets//Images//Player//Melee//5.png";
+	meleeImg[5] = "Assets//Images//Player//Melee//6.png";
+	meleeImg[6] = "Assets//Images//Player//Melee//7.png";
+}
+
 void Player::initPlayerRect(int x, int y, int w, int h) {
 	playerRect.x = x;
 	playerRect.y = y;
@@ -51,6 +63,7 @@ void Player::initPlayerRect(int x, int y, int w, int h) {
 
 void Player::showPlayer(SDL_Renderer* &renderer) {
 	renderImageX(currentImg.c_str(), renderer, &playerRect, NULL,flipped);
+	SDL_RenderDrawRect(renderer, &playerRect);
 }
 
 void Player::update() {
@@ -59,7 +72,10 @@ void Player::update() {
 		updatePlayerImg(idleImg,5);
 		break;
 	case 2:
-		updatePlayerImg(runImg,2);
+		if(playerState!=3)updatePlayerImg(runImg,2);
+		break;
+	case 3:
+		updatePlayerImg(meleeImg, 3);
 		break;
 	}
 	updatePlayerPosition();
@@ -109,11 +125,15 @@ void Player::decreasePlayerY(bool flag) {
 
 void Player::updatePlayerImg(std::vector<std::string> &currentImgs,int changeRate) {
 	currentImg = currentImgs[currentImgIndex];
+
 	if (getFrameNumber() % changeRate == 0)currentImgIndex++;
 
-	if(playerState==1 || playerState==2)
-		if (currentImgIndex >= currentImgs.size())
-			currentImgIndex = 0;
+	
+	if (currentImgIndex >= currentImgs.size()) {
+		if (playerState == 3 || playerState == 4)
+			playerState = 1;
+		currentImgIndex = 0;
+	}
 }
 
 void Player::updatePlayerPosition() {
@@ -136,4 +156,8 @@ void Player::setPlayerBorders() {
 
 void Player::setFlipped(bool value) {
 	flipped = value;
+}
+
+void Player::meleeAttack() {
+	playerState = 3;
 }
