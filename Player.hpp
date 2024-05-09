@@ -6,9 +6,14 @@
 class Player {
 private:
 	int speed;
+	SDL_Rect playerRenderRect;
 	SDL_Rect playerRect;
+	SDL_Rect attackRect;
 	std::string currentImg;
 	int currentImgIndex;
+
+	void initPlayerRect();
+	void initAttackRect();
 
 
 	int playerBorderLeft;

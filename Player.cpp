@@ -7,6 +7,8 @@ Player::Player() {
 	initRunImg();
 	initMeleeImg();
 	initPlayerRect(100, 300, 240, 200);
+	initPlayerRect();
+	initAttackRect();
 	currentImg = idleImg[0];
 	currentImgIndex = 0;
 	playerState = 1;
@@ -54,16 +56,18 @@ void Player::initMeleeImg() {
 }
 
 void Player::initPlayerRect(int x, int y, int w, int h) {
-	playerRect.x = x;
-	playerRect.y = y;
-	playerRect.w = w;
-	playerRect.h = h;
+	playerRenderRect.x = x;
+	playerRenderRect.y = y;
+	playerRenderRect.w = w;
+	playerRenderRect.h = h;
 }
 
 
 void Player::showPlayer(SDL_Renderer* &renderer) {
-	renderImageX(currentImg.c_str(), renderer, &playerRect, NULL,flipped);
+	renderImageX(currentImg.c_str(), renderer, &playerRenderRect, NULL,flipped);
 	SDL_RenderDrawRect(renderer, &playerRect);
+	SDL_RenderDrawRect(renderer, &attackRect);
+	
 }
 
 void Player::update() {
@@ -79,6 +83,7 @@ void Player::update() {
 		break;
 	}
 	updatePlayerPosition();
+	initPlayerRect();
 }
 
 
@@ -137,14 +142,14 @@ void Player::updatePlayerImg(std::vector<std::string> &currentImgs,int changeRat
 }
 
 void Player::updatePlayerPosition() {
-	if (increaseX)playerRect.x += speed,setFlipped(false);
-	if (decreaseX)playerRect.x -= speed,setFlipped(true);
-	if (increaseY)playerRect.y -= speed;
-	if (decreaseY)playerRect.y += speed;
-	if (playerRect.x <= playerBorderLeft)playerRect.x = playerBorderLeft;
-	if (playerRect.x + playerRect.w >= playerBorderRight)playerRect.x = playerBorderRight - playerRect.w;
-	if (playerRect.y <= playerBorderTop)playerRect.y = playerBorderTop;
-	if (playerRect.y + playerRect.h >= playerBorderBottom)playerRect.y = playerBorderBottom - playerRect.h;
+	if (increaseX)playerRenderRect.x += speed,setFlipped(false);
+	if (decreaseX)playerRenderRect.x -= speed,setFlipped(true);
+	if (increaseY)playerRenderRect.y -= speed;
+	if (decreaseY)playerRenderRect.y += speed;
+	if (playerRenderRect.x <= playerBorderLeft)playerRenderRect.x = playerBorderLeft;
+	if (playerRenderRect.x + playerRenderRect.w >= playerBorderRight)playerRenderRect.x = playerBorderRight - playerRenderRect.w;
+	if (playerRenderRect.y <= playerBorderTop)playerRenderRect.y = playerBorderTop;
+	if (playerRenderRect.y + playerRenderRect.h >= playerBorderBottom)playerRenderRect.y = playerBorderBottom - playerRenderRect.h;
 }
 
 void Player::setPlayerBorders() {
@@ -160,4 +165,26 @@ void Player::setFlipped(bool value) {
 
 void Player::meleeAttack() {
 	playerState = 3;
+	currentImgIndex = 0;
+}
+
+void Player::initPlayerRect() {
+	playerRect.x = playerRenderRect.x + 60;
+	playerRect.y = playerRenderRect.y+10;
+	playerRect.w = playerRenderRect.w - 145;
+	playerRect.h = playerRenderRect.h-20;
+	if(flipped)
+		playerRect.x = playerRect.x + 25;
+	if (playerState == 2) {
+		playerRect.w = playerRect.w + 15;
+		if (flipped)
+			playerRect.x = playerRect.x - 15;
+	}
+}
+
+void Player::initAttackRect() {
+	attackRect.x = playerRect.x + playerRect.w;
+	attackRect.y = playerRect.y;
+	attackRect.w = 60;
+	attackRect.h = playerRect.h;
 }
