@@ -4,6 +4,7 @@
 #include "GameSurroundings.h"
 #include "Player.hpp"
 #include "ImageRenderer.h"
+#include "Essentials.hpp"
 
 class Game {
 public:

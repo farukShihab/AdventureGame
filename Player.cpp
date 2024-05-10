@@ -84,6 +84,7 @@ void Player::update() {
 	}
 	updatePlayerPosition();
 	initPlayerRect();
+	initAttackRect();
 }
 
 
@@ -95,7 +96,7 @@ void Player::increasePlayerX(bool flag) {
 			currentImgIndex = 0;
 		}
 	}
-	else if(!increaseX && !decreaseX  && !increaseY && !decreaseY) playerState = 1;
+	else if(!increaseX && !decreaseX  && !increaseY && !decreaseY && playerState!=3) playerState = 1;
 }
 void Player::decreasePlayerX(bool flag) {
 	decreaseX = flag;
@@ -105,7 +106,7 @@ void Player::decreasePlayerX(bool flag) {
 			currentImgIndex = 0;
 		}
 	}
-	else if (!increaseX && !decreaseX && !increaseY && !decreaseY) playerState = 1;
+	else if (!increaseX && !decreaseX && !increaseY && !decreaseY && playerState != 3) playerState = 1;
 }
 void Player::increasePlayerY(bool flag) {
 	increaseY = flag;
@@ -115,7 +116,7 @@ void Player::increasePlayerY(bool flag) {
 			currentImgIndex = 0;
 		}
 	}
-	else if (!increaseX && !decreaseX && !increaseY && !decreaseY) playerState = 1;
+	else if (!increaseX && !decreaseX && !increaseY && !decreaseY && playerState != 3) playerState = 1;
 }
 void Player::decreasePlayerY(bool flag) {
 	decreaseY = flag;
@@ -125,7 +126,7 @@ void Player::decreasePlayerY(bool flag) {
 			currentImgIndex = 0;
 		}
 	}
-	else if (!increaseX && !decreaseX && !increaseY && !decreaseY) playerState = 1;
+	else if (!increaseX && !decreaseX && !increaseY && !decreaseY && playerState != 3) playerState = 1;
 }
 
 void Player::updatePlayerImg(std::vector<std::string> &currentImgs,int changeRate) {
@@ -185,6 +186,8 @@ void Player::initPlayerRect() {
 void Player::initAttackRect() {
 	attackRect.x = playerRect.x + playerRect.w;
 	attackRect.y = playerRect.y;
-	attackRect.w = 60;
+	attackRect.w = 55;
 	attackRect.h = playerRect.h;
+	if (flipped)
+		attackRect.x = playerRect.x - 55;
 }

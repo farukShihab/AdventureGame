@@ -21,20 +21,3 @@ void renderImageX(const static char* fileName, static SDL_Renderer*& renderer, s
 	SDL_DestroyTexture(texture);
 	SDL_FreeSurface(surface);
 }
-
-void updateFrameNumber() {
-	frameNumber++;
-	if (frameNumber == INT_MAX)frameNumber = 0;
-}
-
-int getFrameNumber() {
-	return frameNumber;
-}
-
-int getWindowWidth() {
-	return windowWidth;
-}
-
-int getWindowHeight() {
-	return windowHeight;
-}

@@ -30,6 +30,12 @@
     <ClCompile Include="ImageRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Essentials.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -42,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Essentials.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

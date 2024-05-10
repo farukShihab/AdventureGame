@@ -2,13 +2,12 @@
 #include "SDL.h"
 #include<string>
 #include<vector>
+#include "Essentials.hpp"
 
 class Player {
 private:
 	int speed;
 	SDL_Rect playerRenderRect;
-	SDL_Rect playerRect;
-	SDL_Rect attackRect;
 	std::string currentImg;
 	int currentImgIndex;
 
@@ -50,6 +49,11 @@ private:
 
 	
 public:
+
+	SDL_Rect playerRect;
+	SDL_Rect attackRect;
+
+
 	Player();
 	~Player();
 	void showPlayer(SDL_Renderer* &renderer);
