@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyLevel1.cpp" />
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameSurroundings.cpp" />

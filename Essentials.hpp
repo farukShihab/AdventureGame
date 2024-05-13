@@ -1,3 +1,5 @@
+#pragma once
+
 static int frameNumber = 0;
 void updateFrameNumber();
 int getFrameNumber();
